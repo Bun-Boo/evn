@@ -1,0 +1,9 @@
+const POSITION_NVKD = {
+  CV_KDDV: "CV_KINH_DOANH_DICH_VU",
+  TP_CV_KDDV: "TRUONG_PHONG_KINH_DOANH_DICH_VU",
+  QA: "QA_-_QUAN_LY_CHAT_LUONG",
+};
+
+export default {
+  POSITION_NVKD,
+};
