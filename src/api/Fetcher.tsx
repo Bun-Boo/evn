@@ -92,13 +92,11 @@ export function fetcher<T>(
       'Content-Type': Config.HEADER_CONTENT_TYPE.APPLICATION_JSON,
       'os-type': isIOS() ? 'ios' : 'android',
       'app-version': Config.VERSION_HEADER_FETCHER.DEV,
-      // 'Access-Control-Allow-Origin': '*',
-      'Origin':'https://uneti.edu.vn',
+      'Access-Control-Allow-Origin': '*',
     },
     // mode: 'no-cors',
     baseURL: Config.APP_CONFIG.API_BASE_URL,
     timeout: Config.APP_CONFIG.TIMEOUT,
-    // Origin: Config.APP_CONFIG.HOST,
   });
   const state = store.getState();
 

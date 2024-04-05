@@ -1,15 +1,6 @@
 // Screen
 import React, {ReactElement} from 'react';
 import Profile from 'src/components/Profile';
-import TaiSan from 'src/components/TaiSan';
-import News from 'src/components/News';
-import BieuMau from 'src/components/BieuMau';
-import MotCua from 'src/components/MotCua';
-import Roles from 'src/screen/MotCuaScreen/Rules';
-import PhucKhao from 'src/screen/MotCuaScreen/MotCuaKhaoThi/PhucKhao';
-import LichThi from 'src/screen/MotCuaScreen/MotCuaKhaoThi/LichThi';
-import Login from 'src/screen/auth/Login';
-import MotCuaScreen from 'src/screen/MotCuaScreen';
 export type AppRootParamList = {
   // Public
   LoginRoute: {param?: {from: string}} | undefined;
@@ -214,47 +205,6 @@ interface IRoute {
 const routes: IRoute[] = [
   // bottom tab
   {
-    component: MotCua,
-    name: 'MotCuaRoute',
-    title: 'Một Cửa',
-    icon: 'Product-Bottom',
-    isBottom: true,
-    isPrivate: true,
-    isCollaborator: false,
-  },
-  {
-    component: News,
-    name: 'NewsRoute',
-    title: 'Tin tức',
-    icon: 'globe-americas',
-    isBottom: true,
-    isPrivate: false,
-    isCollaborator: true,
-  },
-  {
-    component: TaiSan,
-    name: 'TaiSanRoute',
-    title: 'Tài Sản',
-    icon: 'File-Er',
-    isBottom: true,
-    isPrivate: false,
-    isCollaborator: true,
-  },
-  {
-    component: BieuMau,
-    name: 'BieuMauRoute',
-    title: 'Biểu Mẫu',
-    icon: 'AF-Icon',
-    isBottom: true,
-    isPrivate: false,
-    isCollaborator: false,
-  },
-  {
-    component: Roles,
-    name: 'RolesRoute',
-    title: 'RolesRoute',
-  },
-  {
     component: Profile,
     name: 'ProfileRoute',
     title: 'Cá nhân',
@@ -262,26 +212,6 @@ const routes: IRoute[] = [
     isBottom: true,
     isPrivate: false,
     isCollaborator: true,
-  },
-  {
-    component: PhucKhao,
-    name: 'PhucKhaoRoute',
-    title: 'PhucKhaoRoute',
-  },
-  {
-    component: LichThi,
-    name: 'LichThiRoute',
-    title: 'LichThiRoute',
-  },
-  {
-    component: Login,
-    name: 'LoginRoute',
-    title: 'LoginRoute',
-  },
-  {
-    component: MotCuaScreen,
-    name: 'ThuTucHanhChinhSVRoute',
-    title: 'ThuTucHanhChinhSVRoute',
   },
 ];
 

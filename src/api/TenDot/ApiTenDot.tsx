@@ -1,7 +1,9 @@
 import {fetcher} from '../Fetcher';
 import store from '../../redux/store';
 
-export interface ITenDot {
+/*
+*/
+export interface IHistory {
   code: number;
   arrayLength: number;
   activeYear: number;
@@ -37,7 +39,7 @@ const path = {
 
 const dispatch = store.dispatch;
 
-function getTenDot(): Promise<ITenDot> {
+function getTenDot(): Promise<IHistory> {
   return fetcher({url: path.tenDot, method: 'get'}, dispatch, {
     displayError: true,
   });

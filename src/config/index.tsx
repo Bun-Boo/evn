@@ -14,10 +14,8 @@ const ENV_KEY = {
 const APP_CONFIG = {
   ENV_KEY: 'DEVELOP',
 
-  HOST: 'https://unetiv2.edu.vn',
-  API_BASE_URL: 'https://apiv2.uneti.edu.vn',
-  // HOST: 'http://25.11.199.238:3030',
-  // API_BASE_URL: 'http://25.11.199.238:3030',
+  HOST: 'https://sheetdb.io/api/v1/fovwae5mxlivt',
+  API_BASE_URL: 'https://sheetdb.io/api/v1/fovwae5mxlivt',
 
   TIMEOUT: 300000,
   RETRY: false,
@@ -26,6 +24,19 @@ const APP_CONFIG = {
   USE_TOKEN_LIVE: false,
   WITH_METADATA: false,
   ERROR_CODE_AUTHEN_TOKEN: 'JWT000102',
+};
+
+// listRole
+const LIST_ROLE = {
+  1: 'Admin',
+  2: 'Moderator',
+  3: 'User',
+};
+
+// listCot
+const LIST_COT = {
+  1: 'Cột bê tông li tâm',
+  2: 'Cột thép',
 };
 
 // NAME

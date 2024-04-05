@@ -10,6 +10,7 @@ import ApiUser from 'src/api/User/ApiUser';
 import BottomTabContentHome from './BottomTabContentHome';
 import Home from 'src/components/Home';
 import ThongBao from 'src/components/ThongBao';
+import Profile from 'src/components/Profile';
 import DetailPodCast from 'src/screen/HomeScreen/DetailPodCast';
 
 function BottomTabHome(): ReactElement {
@@ -21,9 +22,9 @@ function BottomTabHome(): ReactElement {
 
   return (
     <Tab.Navigator tabBar={tabBar} screenOptions={{headerShown: false}}>
-      <Tab.Screen name={RouteName.TrangChu} component={Home} />
       <Tab.Screen name={RouteName.ThongBao} component={ThongBao} />
-      {/* <Tab.Screen name={RouteName.Profile} component={Profile} /> */}
+      <Tab.Screen name={RouteName.TrangChu} component={Home} />
+      <Tab.Screen name={RouteName.Profile} component={Profile} />
     </Tab.Navigator>
   );
 }

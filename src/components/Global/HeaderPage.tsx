@@ -22,6 +22,7 @@ import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Config from 'src/config';
 import {isTablet} from 'react-native-device-info';
+import { red } from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 const {TRENDING_ICON, PRIMARY_MK_BLUE} = Config.COLOR_CONFIG;
 interface HeaderPageProps {
   icon1?: any;
@@ -64,7 +65,8 @@ function HeaderPage({
           </Text>
         </>
       ) : (
-        <View style={{paddingHorizontal: 0}}>{children}</View>
+        <View style={{paddingHorizontal: 0,
+        width: '100%'}}>{children}</View>
       )}
       <View style={style.wrapperIcon}>
         {icon1 ? (

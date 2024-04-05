@@ -1,13 +1,22 @@
 import React, {ReactElement, memo} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import Header from '../Global/HeaderPage';
 import ThongBaoScreen from 'src/screen/ThongBaoScreen';
-import Icon from 'src/utils/Icon';
 
 function ThongBao(): ReactElement {
   return (
     <View style={{flex: 1}}>
-      <Header logo icon1={<Icon icon="Search" size={20} color="#fff" />} />
+      <Header children={
+          <Text
+            style={{
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: 14,
+            textAlign: 'center',
+            }}>
+            LỊCH SỬ TÍNH TOÁN
+          </Text>
+        } />
       <ThongBaoScreen />
     </View>
   );

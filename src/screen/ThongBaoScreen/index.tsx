@@ -1,40 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {ReactElement} from 'react';
+import ApiHistory, {IHistory} from 'src/api/History/ApiHistory';
 import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import TouchableGlobal from 'src/components/Global/TouchableGlobal';
 
 function ThongBaoScreen(): ReactElement {
-  const dataTB = [
-    {
-      id: 0,
-      title: 'Thông báo 1',
-      date: '22/12/2022',
-      subTitle:
-        '(Làm vé tháng xe bus; Đang học tại trường; Thuê nhà ở sinh viên; Cấp lại thẻ BHYT; Đối tượng chính sách; Sổ ưu đãi; Vay vốn)',
-      image: '',
-    },
-    {
-      id: 1,
-      title: 'Thông báo 2',
-      date: '22/12/2022',
-      subTitle: '(Bảo lưu kết quả học tập, Xin thôi học, Trở lại học tập)',
-      image: '',
-    },
-    {
-      id: 2,
-      title: 'Thông báo 3',
-      date: '22/12/2022',
-      subTitle: '(Xin nghỉ học để điều trị bệnh)',
-      image: '',
-    },
-    {
-      id: 3,
-      title: 'Thông báo 4',
-      date: '22/12/2022',
-      subTitle: '(Địa điểm học, Trường học)',
-      image: '',
-    },
-  ];
+  const [data, setData] = React.useState<IHistory[]>([]);
+
+  useEffect(() => {
+    ApiHistory.getHistory().then((res) => {
+        setData(res);
+      }
+    );
+
+  }, []);
+  
 
   const renderItem = ({item}: {item: any}) => (
     <TouchableGlobal
@@ -43,9 +23,11 @@ function ThongBaoScreen(): ReactElement {
       }}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.subTitle}>{item.subTitle}</Text>
-          <Text style={styles.subTitleDate}>{item.date}</Text>
+          <Text style={styles.title}>{item.chonCot==1?"Cột bê tông li tâm":"Cột thép"}</Text>
+          <Text style={styles.subTitle}>Địa phương: {item.diaPhuong}</Text>
+          <Text style={styles.subTitle}>Loại dây: {item.dayDan}</Text>
+          <Text style={styles.subTitle}>Công dụng cột: {item.congDungCot}</Text>
+          <Text style={styles.subTitleDate}>Thời gian tạo: {item.dateTime}</Text>
         </View>
       </View>
     </TouchableGlobal>
@@ -54,7 +36,7 @@ function ThongBaoScreen(): ReactElement {
   return (
     <View style={{flex: 1}}>
       <FlatList
-        data={[]}
+        data={data}
         renderItem={renderItem}
         keyExtractor={(item, index) => `_${index}`}
       />

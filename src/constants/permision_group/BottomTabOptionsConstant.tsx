@@ -28,38 +28,6 @@ import RouteName from '../../routes/RouteName';
 //   },
 // ];
 
-const BottomTabMainGroup = [
-  {
-    index: 0,
-    name: 'Một cửa',
-    routeName: RouteName.MotCua,
-    icon: 'Product-Bottom',
-  },
-  {
-    index: 1,
-    name: 'Tin tức',
-    routeName: RouteName.News,
-    icon: 'globe-americas',
-  },
-  {
-    index: 2,
-    name: 'Tài sản',
-    routeName: RouteName.TaiSan,
-    icon: 'File-Er',
-  },
-  {
-    index: 3,
-    name: 'Biểu mẫu',
-    routeName: RouteName.BieuMau,
-    icon: 'globe-americas',
-  },
-  {
-    index: 4,
-    name: 'Cá nhân',
-    routeName: RouteName.Profile,
-    icon: 'User',
-  },
-];
 const BottomTabHomeGroup = [
   {
     index: 1,
@@ -110,7 +78,6 @@ const BottomTabHomeGroup = [
 
 export default {
   // BottomTabCommon,
-  BottomTabMainGroup,
   BottomTabHomeGroup,
   // BottomTabCTVGroup,
 };

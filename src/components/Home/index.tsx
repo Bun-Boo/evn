@@ -12,14 +12,13 @@ function Home(): ReactElement {
         children={
           <Text
             style={{
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: 14,
-              textAlign: 'center',
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: 14,
+            textAlign: 'center',
             }}>
             {/* EVN */}
-            BẢNG KẾT QUẢ TÍNH LỰC ĐẦU CỘT VÀ CHỌN CỘT (TÍNH TOÁN CHO CỘT BTLT) -
-            123
+            BẢNG KẾT QUẢ TÍNH LỰC ĐẦU CỘT VÀ CHỌN CỘT (TÍNH TOÁN CHO CỘT BTLT)
           </Text>
         }
       />
