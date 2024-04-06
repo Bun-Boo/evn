@@ -92,8 +92,6 @@ export function fetcher<T>(
       'Content-Type': Config.HEADER_CONTENT_TYPE.APPLICATION_JSON,
       'os-type': isIOS() ? 'ios' : 'android',
       'app-version': Config.VERSION_HEADER_FETCHER.DEV,
-      // 'Access-Control-Allow-Origin': '*',
-      'Origin':'https://uneti.edu.vn',
     },
     // mode: 'no-cors',
     baseURL: Config.APP_CONFIG.API_BASE_URL,

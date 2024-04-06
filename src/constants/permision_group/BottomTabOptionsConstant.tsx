@@ -67,12 +67,12 @@ const BottomTabHomeGroup = [
     routeName: RouteName.TrangChu,
     icon: 'home-work',
   },
-  {
-    index: 0,
-    name: 'Lịch sử',
-    routeName: RouteName.ThongBao,
-    icon: 'Heart_Full',
-  },
+  // {
+  //   index: 0,
+  //   name: 'Lịch sử',
+  //   routeName: RouteName.ThongBao,
+  //   icon: 'Heart_Full',
+  // },
   {
     index: 2,
     name: 'Cá nhân',

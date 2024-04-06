@@ -1,5 +1,6 @@
 import {
   ImageBackground,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -59,6 +60,7 @@ function HeaderPage({
               fontWeight: 'bold',
               fontSize: 14,
               color: 'white',
+              paddingVertical: Platform.OS === 'ios' ? 0 : 30,
             }}>
             Bro chill không ?
           </Text>

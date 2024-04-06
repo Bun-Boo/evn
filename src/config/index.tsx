@@ -14,8 +14,8 @@ const ENV_KEY = {
 const APP_CONFIG = {
   ENV_KEY: 'DEVELOP',
 
-  HOST: 'https://unetiv2.edu.vn',
-  API_BASE_URL: 'https://apiv2.uneti.edu.vn',
+  HOST: 'https://660e52616ddfa2943b36637e.mockapi.io/',
+  API_BASE_URL: 'https://660e52616ddfa2943b36637e.mockapi.io/',
   // HOST: 'http://25.11.199.238:3030',
   // API_BASE_URL: 'http://25.11.199.238:3030',
 

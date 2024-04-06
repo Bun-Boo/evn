@@ -1,9 +1,22 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const ListPodCast = ({data}) => {
+  const navigation = useNavigation();
   const renderItem = ({item}) => (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        navigation.navigate('DetailPodCast', {item});
+      }}>
       <Image
         source={{uri: item.image}}
         style={styles.image}
@@ -17,7 +30,7 @@ const ListPodCast = ({data}) => {
           {item.subTitle}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

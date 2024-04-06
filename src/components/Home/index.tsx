@@ -8,7 +8,7 @@ function Home(): ReactElement {
   return (
     <View style={{flex: 1}}>
       <Header
-        // logo
+        logo
         children={
           <Text
             style={{
@@ -17,9 +17,7 @@ function Home(): ReactElement {
               fontSize: 14,
               textAlign: 'center',
             }}>
-            {/* EVN */}
-            BẢNG KẾT QUẢ TÍNH LỰC ĐẦU CỘT VÀ CHỌN CỘT (TÍNH TOÁN CHO CỘT BTLT) -
-            123
+            Bro chill không ?
           </Text>
         }
       />
