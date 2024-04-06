@@ -132,9 +132,6 @@ export type AppRootParamList = {
     queryId?: number;
   };
   QRScannerRoute: undefined;
-  ResponseDetailRoute: {
-    data: IFeedbackDetail;
-  };
   DetailAffiliateOrderRoute: {
     // dataItem: IAffiliateItem;
   };
@@ -164,15 +161,7 @@ export type AppRootParamList = {
     actionType: string;
   };
   CreateCollaboratorRegisterRoute: undefined;
-  CreateCollaboratorOrderRoute: {
-    type?: string;
-    dataDetailItem?: ICollaboratorItem;
-  };
   CollaboratorOrderListRoute: undefined;
-  DetailCollaboratorOrderRoute: {
-    dataItem: ICollaboratorItem;
-  };
-  ViewCollaboratorStatisticRoute: undefined;
   DetailCollaboratorStatisticRoute: undefined;
   OrderStatisticRoute: {
     ordersSource?: number;

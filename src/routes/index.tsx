@@ -11,7 +11,7 @@ import BottomTabContentHome from './BottomTabContentHome';
 import Home from 'src/components/Home';
 import ThongBao from 'src/components/ThongBao';
 import Profile from 'src/components/Profile';
-import DetailPodCast from 'src/screen/HomeScreen/DetailPodCast';
+import Result from 'src/components/Result';
 
 function BottomTabHome(): ReactElement {
   const Tab = createBottomTabNavigator();
@@ -24,7 +24,8 @@ function BottomTabHome(): ReactElement {
     <Tab.Navigator tabBar={tabBar} screenOptions={{headerShown: false}}>
       <Tab.Screen name={RouteName.ThongBao} component={ThongBao} />
       <Tab.Screen name={RouteName.TrangChu} component={Home} />
-      <Tab.Screen name={RouteName.Profile} component={Profile} />
+      {/* <Tab.Screen name={RouteName.Profile} component={Profile} /> */}
+      <Tab.Screen name={RouteName.Result} component={Result} />
     </Tab.Navigator>
   );
 }
@@ -43,7 +44,7 @@ function AppNavigator(): ReactElement {
         }}
         initialRouteName={RouteName.HomeTab}>
         <Stack.Screen component={BottomTabHome} name={RouteName.HomeTab} />
-        <Stack.Screen component={DetailPodCast} name="DetailPodCast" />
+        {/* <Stack.Screen component={Result} name={RouteName.Result} /> */}
       </Stack.Navigator>
       {/* <ModalLogin /> */}
     </NavigationContainer>

@@ -7,6 +7,7 @@ const RouteName = {
   Roles: 'RolesRoute',
   ThongBao: 'ThongBaoRoute',
   TrangChu: 'TrangChuRoute',
+  Result: 'ResultRoute'
 };
 
 export default RouteName;

@@ -19,7 +19,7 @@ function ThongBaoScreen(): ReactElement {
   const renderItem = ({item}: {item: any}) => (
     <TouchableGlobal
       onPress={() => {
-        console.log('chi tiet thong bao');
+        console.log('chi tiet thong bao 1');
       }}>
       <View style={styles.container}>
         <View style={styles.textContainer}>

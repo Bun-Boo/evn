@@ -30,13 +30,13 @@ import RouteName from '../../routes/RouteName';
 
 const BottomTabHomeGroup = [
   {
-    index: 1,
+    index: 0,
     name: 'Trang chủ',
     routeName: RouteName.TrangChu,
     icon: 'home-work',
   },
   {
-    index: 0,
+    index: 1,
     name: 'Lịch sử',
     routeName: RouteName.ThongBao,
     icon: 'Heart_Full',
@@ -44,7 +44,7 @@ const BottomTabHomeGroup = [
   {
     index: 2,
     name: 'Cá nhân',
-    routeName: RouteName.Profile,
+    routeName: RouteName.Result,
     icon: 'User',
   },
 ];
