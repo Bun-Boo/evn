@@ -28,7 +28,6 @@ import {VideoPlayer} from './VideoPlayer';
 const DetailPodCast = ({route, navigation}) => {
   const {item} = route.params;
   const insets = useSafeAreaInsets();
-  console.log('item', item);
 
   const [visible, setVisible] = React.useState(false);
   const [start, setStart] = React.useState({
@@ -60,16 +59,13 @@ const DetailPodCast = ({route, navigation}) => {
           <View style={styles.body}>
             <Image source={{uri: item.image}} style={styles.image} />
             <View style={styles.wrapper}>
-              <Text style={styles.titleText} numberOfLines={2}>
-                {item.title}
-              </Text>
+              <Text style={styles.titleText}>{item.title}</Text>
 
-              <Text style={styles.description} numberOfLines={4}>
-                {item.subTitle}
-              </Text>
+              <Text style={styles.description}>{item.subTitle}</Text>
             </View>
           </View>
         </ScrollView>
+        <View style={{height: 100}} />
         <View style={styles.listenNow}>
           <TouchableOpacity
             onPress={() =>

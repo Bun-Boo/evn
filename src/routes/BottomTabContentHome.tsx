@@ -39,22 +39,6 @@ const BottomTabContentHome = React.memo(function BottomTabContentHome() {
       return BottomTabOptionsConstant.BottomTabHomeGroup;
     }, []);
 
-  // const handleGetTenDot = (): void => {
-  //   ApiTenDot.getTenDot().then(response => {
-  //     if (response.code === 200) {
-  //       dispatch(
-  //         TenDotAction.getTenDot({
-  //           ...response,
-  //         }),
-  //       );
-  //     }
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   handleGetTenDot();
-  // }, []);
-
   return (
     <View style={[styles.main, {backgroundColor: theme.background}]}>
       {selectBottomTabContentHome().map(({routeName, index, name, icon}) => {

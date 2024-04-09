@@ -4,13 +4,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import RouteName from './RouteName';
 import {navigationRef} from './navigationServices';
-import Login from 'src/components/Login';
-import {checkValidLogin} from 'src/utils/checkValidLogin';
-import ApiUser from 'src/api/User/ApiUser';
 import BottomTabContentHome from './BottomTabContentHome';
 import Home from 'src/components/Home';
-import ThongBao from 'src/components/ThongBao';
 import DetailPodCast from 'src/screen/HomeScreen/DetailPodCast';
+import Profile from 'src/screen/Profile';
 
 function BottomTabHome(): ReactElement {
   const Tab = createBottomTabNavigator();
@@ -22,8 +19,7 @@ function BottomTabHome(): ReactElement {
   return (
     <Tab.Navigator tabBar={tabBar} screenOptions={{headerShown: false}}>
       <Tab.Screen name={RouteName.TrangChu} component={Home} />
-      <Tab.Screen name={RouteName.ThongBao} component={ThongBao} />
-      {/* <Tab.Screen name={RouteName.Profile} component={Profile} /> */}
+      <Tab.Screen name={RouteName.Profile} component={Profile} />
     </Tab.Navigator>
   );
 }

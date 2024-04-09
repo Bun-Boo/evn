@@ -1,15 +1,8 @@
 // Screen
 import React, {ReactElement} from 'react';
-import Profile from 'src/components/Profile';
-import TaiSan from 'src/components/TaiSan';
-import News from 'src/components/News';
-import BieuMau from 'src/components/BieuMau';
-import MotCua from 'src/components/MotCua';
-import Roles from 'src/screen/MotCuaScreen/Rules';
-import PhucKhao from 'src/screen/MotCuaScreen/MotCuaKhaoThi/PhucKhao';
-import LichThi from 'src/screen/MotCuaScreen/MotCuaKhaoThi/LichThi';
 import Login from 'src/screen/auth/Login';
 import MotCuaScreen from 'src/screen/MotCuaScreen';
+import Profile from 'src/screen/Profile';
 export type AppRootParamList = {
   // Public
   LoginRoute: {param?: {from: string}} | undefined;
@@ -142,7 +135,7 @@ export type AppRootParamList = {
   };
   QRScannerRoute: undefined;
   ResponseDetailRoute: {
-    data: IFeedbackDetail;
+    data: any;
   };
   DetailAffiliateOrderRoute: {
     // dataItem: IAffiliateItem;
@@ -175,11 +168,11 @@ export type AppRootParamList = {
   CreateCollaboratorRegisterRoute: undefined;
   CreateCollaboratorOrderRoute: {
     type?: string;
-    dataDetailItem?: ICollaboratorItem;
+    dataDetailItem?: any;
   };
   CollaboratorOrderListRoute: undefined;
   DetailCollaboratorOrderRoute: {
-    dataItem: ICollaboratorItem;
+    dataItem: any;
   };
   ViewCollaboratorStatisticRoute: undefined;
   DetailCollaboratorStatisticRoute: undefined;
@@ -212,67 +205,6 @@ interface IRoute {
   isCollaborator?: boolean;
 }
 const routes: IRoute[] = [
-  // bottom tab
-  {
-    component: MotCua,
-    name: 'MotCuaRoute',
-    title: 'Một Cửa',
-    icon: 'Product-Bottom',
-    isBottom: true,
-    isPrivate: true,
-    isCollaborator: false,
-  },
-  {
-    component: News,
-    name: 'NewsRoute',
-    title: 'Tin tức',
-    icon: 'globe-americas',
-    isBottom: true,
-    isPrivate: false,
-    isCollaborator: true,
-  },
-  {
-    component: TaiSan,
-    name: 'TaiSanRoute',
-    title: 'Tài Sản',
-    icon: 'File-Er',
-    isBottom: true,
-    isPrivate: false,
-    isCollaborator: true,
-  },
-  {
-    component: BieuMau,
-    name: 'BieuMauRoute',
-    title: 'Biểu Mẫu',
-    icon: 'AF-Icon',
-    isBottom: true,
-    isPrivate: false,
-    isCollaborator: false,
-  },
-  {
-    component: Roles,
-    name: 'RolesRoute',
-    title: 'RolesRoute',
-  },
-  {
-    component: Profile,
-    name: 'ProfileRoute',
-    title: 'Cá nhân',
-    icon: 'User',
-    isBottom: true,
-    isPrivate: false,
-    isCollaborator: true,
-  },
-  {
-    component: PhucKhao,
-    name: 'PhucKhaoRoute',
-    title: 'PhucKhaoRoute',
-  },
-  {
-    component: LichThi,
-    name: 'LichThiRoute',
-    title: 'LichThiRoute',
-  },
   {
     component: Login,
     name: 'LoginRoute',
@@ -282,6 +214,11 @@ const routes: IRoute[] = [
     component: MotCuaScreen,
     name: 'ThuTucHanhChinhSVRoute',
     title: 'ThuTucHanhChinhSVRoute',
+  },
+  {
+    component: Profile,
+    name: 'ProfileRoute',
+    title: 'ProfileRoute',
   },
 ];
 

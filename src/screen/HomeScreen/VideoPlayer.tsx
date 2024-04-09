@@ -326,9 +326,7 @@ export const VideoPlayer: React.FC<Props> = function ({
     <TouchableWithoutFeedback style={styles.player.container}>
       <View style={styles.player.container}>
         <Video
-          source={{
-            uri: video,
-          }}
+          source={video}
           ref={primaryRef}
           resizeMode={'contain'}
           paused={isPaused}

@@ -56,11 +56,11 @@ function HeaderPage({
           />
           <Text
             style={{
-              marginLeft: 10,
+              marginLeft: -50,
               fontWeight: 'bold',
               fontSize: 14,
               color: 'white',
-              paddingVertical: Platform.OS === 'ios' ? 0 : 30,
+              paddingVertical: Platform.OS === 'ios' ? 0 : 10,
             }}>
             Bro chill không ?
           </Text>
@@ -159,7 +159,7 @@ const style = StyleSheet.create({
   root1: {
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     paddingHorizontal: 15,
     backgroundColor: '#A32E8C',
     paddingVertical: 5,
