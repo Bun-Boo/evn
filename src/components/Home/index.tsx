@@ -1,20 +1,58 @@
-import React, {ReactElement, memo} from 'react';
+import React, {ReactElement, memo, useEffect} from 'react';
 import {
   Alert,
+  Dimensions,
+  Image,
   Modal,
+  PermissionsAndroid,
+  Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import Header from '../Global/HeaderPage';
-import HomeScreen from 'src/screen/HomeScreen';
+import HomeScreen, {data1, data2} from 'src/screen/HomeScreen';
 import Icon from 'src/utils/Icon';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
+import {request, PERMISSIONS} from 'react-native-permissions';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import ModalGlobal from '../Global/ModalGlobal';
+import {useNavigation} from '@react-navigation/native';
+const PERMISSION_AUTHORIZED = 'authorized';
 
 function Home(): ReactElement {
   const [open, setOpen] = React.useState(false);
+  const insets = useSafeAreaInsets();
+
+  const [data, setData] = React.useState();
+
+  const allData = data1.concat(data2);
+
+  const postCard = allData.filter(item => item.id == data);
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      Promise.all([request(PERMISSIONS.IOS.CAMERA)]).then(([cameraStatus]) => {
+        console.log(cameraStatus);
+      });
+    } else if (Platform.OS === 'android') {
+      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
+        title: 'Ứng dụng cần quyền truy cập vào máy ảnh',
+        message: 'Ứng dụng cần quyền truy cập vào máy ảnh để quét mã QR',
+      }).then(granted => {
+        const isAuthorized = granted === PermissionsAndroid.RESULTS.GRANTED;
+        console.log(isAuthorized);
+      });
+    } else {
+    }
+  }, []);
+
+  const [toggleModal, setToggleModal] = React.useState(true);
+
+  const navigation = useNavigation();
+
   return (
     <View style={{flex: 1}}>
       <Header
@@ -51,15 +89,27 @@ function Home(): ReactElement {
         transparent={false}
         visible={open}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           setOpen(false);
         }}>
         <View style={{flex: 1}}>
           <QRCodeScanner
-            onRead={() => {}}
-            flashMode={RNCamera.Constants.FlashMode.torch}
+            onRead={e => {
+              setData(e.data);
+              setOpen(false);
+
+              setToggleModal(true);
+            }}
+            // flashMode={RNCamera.Constants.FlashMode.torch}
             topContent={
-              <Text style={styles.centerText}>Đặt mã Qr vào khung hình</Text>
+              <Text
+                style={[
+                  styles.centerText,
+                  {
+                    paddingTop: insets.top,
+                  },
+                ]}>
+                Đặt mã Qr vào khung hình
+              </Text>
             }
             bottomContent={
               <TouchableOpacity
@@ -71,6 +121,53 @@ function Home(): ReactElement {
           />
         </View>
       </Modal>
+      {postCard.length > 0 && (
+        <ModalGlobal
+          cancelText="Đóng"
+          confirmText="Nghe ngay"
+          onConfirm={() => {
+            navigation.navigate('DetailPodCast', {item: postCard[0]});
+          }}
+          modalItem={
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                source={{uri: postCard[0].image}}
+                style={{
+                  width: 150,
+                  height: 150,
+                  borderRadius: 75,
+                }}
+              />
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 20,
+                  padding: 10,
+                }}
+                numberOfLines={2}>
+                {postCard[0].title}
+              </Text>
+              <Text
+                style={{
+                  padding: 10,
+                  fontSize: 16,
+                }}
+                numberOfLines={10}>
+                {postCard[0].subTitle}
+              </Text>
+            </View>
+          }
+          modalVisible={toggleModal}
+          isBottom={false}
+          toggleModal={() => {
+            setToggleModal(false);
+          }}
+        />
+      )}
     </View>
   );
 }

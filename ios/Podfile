@@ -1,4 +1,5 @@
 pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
@@ -27,6 +28,7 @@ if linkage != nil
 end
 
 target 'Uneti' do
+
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -45,6 +47,14 @@ target 'Uneti' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
 
   target 'UnetiTests' do
     inherit! :complete

@@ -21,8 +21,9 @@ import AppButton from 'src/components/Global/AppButton';
 import AppText from 'src/components/Global/AppText';
 import ApiPodcast from 'src/api/Podcast/ApiPodcast';
 
-const data1 = [
+export const data1 = [
   {
+    id: 1,
     title: 'Tôi lắng nghe họ, rồi ai sẽ lắng nghe tôi?',
     subTitle:
       'Sự đồng cảm chỉ đơn giản là lắng nghe, giữ không gian, không phán xét, kết nối cảm xúc và truyền đạt thông điệp giữa mọi người. Câu hỏi cuối cùng mình nhận được cho năm vừa qua là: “Who did you become?”  và mình đã trả lời “a listener”- một người biết lắng nghe. ',
@@ -30,6 +31,7 @@ const data1 = [
     linkVideo: require('src/assets/videos/1.mp4'),
   },
   {
+    id: 2,
     title: 'Nếu bạn nghĩ: MÌNH KHÔNG ĐỦ TỐT',
     subTitle:
       'Có bao giờ bạn thắc mắc cảm giác “mình chưa đủ tốt” đến từ đâu không? Bạn đã cố gắng, đã chăm chỉ nhưng bạn chưa bao giờ thấy đủ? Thế nhưng, như thế nào là đủ tốt? Thế nên, tôi muốn truyền tải những thông điệp để giúp những bạn nào đang có cảm giác giống tôi hiểu rằng: “Dù bạn đã làm gì, bạn cũng đủ tốt, đủ xứng đáng để nhận lấy những điều tốt đẹp nhất”.',
@@ -38,6 +40,7 @@ const data1 = [
     linkVideo: require('src/assets/videos/2.mp4'),
   },
   {
+    id: 3,
     title:
       'Podcast chữa lành | Mình từng không nhận thức được giá trị của bản thân',
     subTitle:
@@ -47,12 +50,14 @@ const data1 = [
     linkVideo: require('src/assets/videos/3.mp4'),
   },
   {
+    id: 4,
     title: 'ĐỪNG CHẤP NHẬN ĐAM MÊ SẼ CHỈ LÀ ĐAM MÊ | Podcast ngắn',
     subTitle: 'Đứng dậy và thay đổi, không thì mọi thứ sẽ chỉ là ước mơ thôi',
     image: 'https://i.ytimg.com/vi/IWJxA-WOo7I/maxresdefault.jpg',
     linkVideo: require('src/assets/videos/4.mp4'),
   },
   {
+    id: 5,
     title: 'Đứa trẻ bên trong cậu đang cảm thấy thế nào?',
     subTitle:
       'Bản thân ba mẹ chúng ta cũng có thể là những đứa trẻ chưa được chữa lành.\nĐến một ngày, khi họ nhìn thấy trên tay đứa con của họ có rất nhiều vết sẹo, họ giận dữ la mắng nó mà không hiểu được rằng đứa con ấy đang cố để nỗi đau thể xác làm nguôi đi những đớn đau tinh thần. Những vết sẹo hữu hình trên tay con cùng với vô vàn những vết thương lòng vô hình bên trong bậc làm cha, làm mẹ vẫn đang cần được chữa lành.',
@@ -61,6 +66,7 @@ const data1 = [
     linkVideo: require('src/assets/videos/5.mp4'),
   },
   {
+    id: 6,
     title: 'Hãy nghe nếu bạn nghĩ mình không xinh',
     subTitle:
       'Thay vì mô tả về video này thì mình muốn mọi người tự cảm nhận. Và yeah, cmt cho mình biết suy nghĩ của bạn',
@@ -68,6 +74,7 @@ const data1 = [
     linkVideo: require('src/assets/videos/6.mp4'),
   },
   {
+    id: 7,
     title:
       'Short Podcast🎙| Podcast ngắn truyền động lực ep.3🌟 | Thất bại có đáng sợ không?',
     subTitle:
@@ -76,6 +83,7 @@ const data1 = [
     linkVideo: require('src/assets/videos/7.mp4'),
   },
   {
+    id: 8,
     title: 'Mình kiệm lời, vì tâm trí đã đủ ồn ào rồi | Podcast',
     subTitle: `Trong một đám đông, ta sẽ thấy có ít nhất một kẻ ít nói. Một vài anh chị trong nhóm quay ra đặt cho người bạn ít nói kia vài câu hỏi phỏng đoán:
       - Sao em nói ít thế? Hướng nội à?
@@ -88,6 +96,7 @@ const data1 = [
     linkVideo: require('src/assets/videos/8.mp4'),
   },
   {
+    id: 9,
     title: 'Vì sao tuổi 20s là lứa tuổi của những giấc mơ tan vỡ?',
     subTitle: `Có những người chết ở tuổi 25 và chỉ đến 75 tuổi mới được chôn.
       Some people die at 25 and aren't buried until 75." - Benjamin Franklin
@@ -97,14 +106,16 @@ const data1 = [
     linkVideo: require('src/assets/videos/9.mp4'),
   },
   {
+    id: 10,
     title: 'Everyone strives to live and must live in your own way',
     subTitle: `Chúng ta đều đang sống theo cách của riêng mình. Lối sống ấy có thể rất có ý nghĩa, cũng có thể không, có thể nhìn vào rất an ổn, cũng có thể cảm thấy rất chông chênh. Cuốn sách bạn viết không ai đọc, những nơi bạn tới đều rất khác biệt, người bạn thích sẽ không bao giờ ở bên bạn cho dù bạn có làm điều gì đi chăng nữa,… Thế nhưng tất cả đều là cách sống riêng của chúng ta. Nếu bạn từng vì nó mà đánh cược thì đừng hỏi con đường này phải đi bao lâu, càng không nên quan tâm người khác gắn mác bạn là gì.`,
     image: 'https://i.ytimg.com/vi/VKzBp0h635Y/maxresdefault.jpg',
     linkVideo: require('src/assets/videos/10.mp4'),
   },
 ];
-const data2 = [
+export const data2 = [
   {
+    id: 11,
     title: 'Áp lực thi cử đối với học sinh chúng tôi lớn tới mức nào?',
     subTitle:
       'Điểm số thực sự không phải tất cả nhưng không có nghĩa bạn không cần phải học gì cả. Học không chỉ là tiếp thu kiến thức mà quan trọng hơn là rèn luyện kĩ năng, phẩm chất thái độ. Học không chỉ để biết mà còn để làm để cùng chung sống để khẳng định mình. Vì vậy hãy học những điều thiết thực và học phải vận dụng được vào trong thực tiễn cuộc sống. Bản thân cha mẹ thay vì hàng ngày hỏi con những câu như hôm nay được mấy điểm hãy hỏi con hôm nay con làm được gì, ở trường có gì vui không? Các cơ sở giáo dục cần thay đổi cách kiểm tra đánh giá, thi cử không chỉ kiểm tra kiến thức mà còn kiểm tra cả năng lực phẩm chất hãy coi trọng 1 sản phẩm ứng dụng học sinh tạo ra hơn là con số trên giấy. Đơn vị tuyển dụng phải luôn đề cao kĩ năng kinh nghiệm lên trên bất cứ loại bằng cấp điểm số nào. Có vậy chúng ta mới giải được bài toán mà cả xã hội đang loay hoay.',
@@ -113,6 +124,7 @@ const data2 = [
     linkVideo: require('src/assets/videos/11.mp4'),
   },
   {
+    id: 12,
     title: '4 mindset về động lực giúp mình ngừng trì hoãn',
     subTitle: `Mình quan niệm rằng: động lực là nội lực để hành động. Nó có thể được thúc đẩy bởi những tác nhân bên ngoài. Nhưng để thực sự biến động lực thành hành động, bạn phải thực sự tự biết cách tạo động lực cho chính mình. 
 
@@ -126,6 +138,7 @@ const data2 = [
     linkVideo: require('src/assets/videos/12.mp4'),
   },
   {
+    id: 13,
     title: 'Vì sao có những người dễ khóc, còn một số khác thì không?',
     subTitle: `Đằng sau giọt nước mắt là cả một câu chuyện dài mà người ngoài cuộc không thể nào hiểu được. Mau nước mắt không có gì là đáng xấu hổ. Nhưng mong rằng cậu hãy quan sát từng đợt khóc của chính mình để nhận ra những dấu hiệu bất ổn và kịp thời tìm sự giúp đỡ. 
 
@@ -135,12 +148,14 @@ const data2 = [
     linkVideo: require('src/assets/videos/13.mp4'),
   },
   {
+    id: 14,
     title: 'Cách Chiến Thắng Sự Trì Hoãn',
     subTitle: `"Mong bạn trở thành phiên bản hoàn hảo nhất. Bản thân hãy cố gắng tiến bộ từng chút một, mỗi ngày hãy cho mình thêm chút hy vọng. Thế giới rộng lớn ngoài kia cũng sẽ vì sự cố gắng của mình mà dần tốt đẹp hơn nữa. Có lẽ chúng ta chưa phải người tốt nhất, nhưng chúng ta có thể trở thành một "cái tôi" tốt hơn."`,
     image: 'https://i.ytimg.com/vi/Bdsf3asTyyQ/maxresdefault.jpg',
     linkVideo: require('src/assets/videos/14.mp4'),
   },
   {
+    id: 15,
     title: 'Ngoài kia, không biết thế giới yêu nhau kiểu gì? Podcast',
     subTitle: `Thay vì nói yêu, có hành động nào để thể hiện tình yêu không?
     Có chứ.
@@ -153,6 +168,7 @@ const data2 = [
     linkVideo: require('src/assets/videos/15.mp4'),
   },
   {
+    id: 16,
     title:
       'Bạn tưởng đó là tình yêu, nhưng hoá ra không phải? | Hiệu ứng tâm lý trong tình yêu',
     subTitle:
@@ -161,6 +177,7 @@ const data2 = [
     linkVideo: require('src/assets/videos/16.mp4'),
   },
   {
+    id: 17,
     title: 'Cậu có thể gọi được tên cảm xúc hiện tại của mình không? - Podcast',
     subTitle: `Ba mẹ chúng ta không phải là những bác sĩ tâm lý, bản thân họ cũng gặp những vấn đề của riêng họ. Khi hiểu được cách kiểm soát cảm xúc, cậu có thể chỉ cho họ biết, hoặc chí ít là sau này, khi trở thành bậc làm cha làm mẹ, cậu cũng sẽ có những cách ứng xử khác để mang lại những điều tốt nhất cho đứa con của mình. Thế hệ của những người trẻ chúng ta là thế hệ cùng nhau chữa lành. Mình tin là chúng mình có thể làm được điều đó. 
 
@@ -169,6 +186,7 @@ const data2 = [
     linkVideo: require('src/assets/videos/17.mp4'),
   },
   {
+    id: 18,
     title: 'Có câu nói nào đã từng khiến cậu vỡ vụn chưa? Podcast',
     subTitle: `Vì một câu nói, mấy giây thôi, em chết đi đôi lần …
 
@@ -178,6 +196,7 @@ const data2 = [
     linkVideo: require('src/assets/videos/18.mp4'),
   },
   {
+    id: 19,
     title: ' Podcast Chữa lành là trở về với chính mình | Bản chất của mình',
     subTitle:
       'Mình bị phản bội, mình tin nhầm người, nhưng mình vẫn chọn đối tốt với họ vì đó là bản chất của mình',
@@ -185,6 +204,7 @@ const data2 = [
     linkVideo: require('src/assets/videos/19.mp4'),
   },
   {
+    id: 20,
     title: 'Một mình có cô đơn không? - Hold Dear',
     subTitle: `Thông qua các video, mình mong muốn chia sẻ những bài học, trải nghiệm và góc nhìn còn nhiều thiếu sót của bản thân như một lời tâm sự vào mỗi cuối tuần, hy vọng sẽ chạm đến góc nhỏ nào đó trong tâm hồn bạn.
 
