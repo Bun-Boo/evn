@@ -1,6 +1,7 @@
 // Screen
 import React, {ReactElement} from 'react';
 import Profile from 'src/components/Profile';
+import Result from 'src/components/Result';
 export type AppRootParamList = {
   // Public
   LoginRoute: {param?: {from: string}} | undefined;
@@ -172,6 +173,7 @@ export type AppRootParamList = {
   RulesRoute: {param?: {title: string}} | undefined;
   RolesRoute: any;
   DetailPodCast: {item: any};
+  ResultRoute: undefined;
 };
 // This registers which makes navigation fully type-safe.
 // https://reactnavigation.org/docs/typescript#specifying-default-types-for-usenavigation-link-ref-etc
@@ -199,6 +201,15 @@ const routes: IRoute[] = [
     title: 'Cá nhân',
     icon: 'User',
     isBottom: true,
+    isPrivate: false,
+    isCollaborator: true,
+  }, 
+  {
+    component: Result,
+    name: 'ResultRoute',
+    title: '',
+    icon: '',
+    isBottom: false,
     isPrivate: false,
     isCollaborator: true,
   },

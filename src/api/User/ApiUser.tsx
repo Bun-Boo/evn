@@ -69,6 +69,7 @@ export interface IInfoStudent {
 const path = {
   login: '/api/jwt/Login',
   infoStudent: '/api/SP_MC_MaSinhVien/Load_Web_App_Para',
+  checkLogin: '/search?sheet=account&username='
 };
 
 const dispatch = store.dispatch;
@@ -89,6 +90,12 @@ function getInfoStudent(body: IInfoStudent): Promise<IInfoStudent> {
   );
 }
 
+function checkLogin(username: string): Promise<any> {
+  return fetcher({url: path.checkLogin + username, method: 'get'}, dispatch, {
+    displayError: true,
+  });
+}
+
 function isLogin(): boolean {
   return !!getAuthToken();
 }
@@ -102,4 +109,5 @@ export default {
   login,
   isLogin,
   getInfoStudent,
+  checkLogin,
 };

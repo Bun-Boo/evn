@@ -22,10 +22,9 @@ function BottomTabHome(): ReactElement {
 
   return (
     <Tab.Navigator tabBar={tabBar} screenOptions={{headerShown: false}}>
-      <Tab.Screen name={RouteName.ThongBao} component={ThongBao} />
       <Tab.Screen name={RouteName.TrangChu} component={Home} />
-      {/* <Tab.Screen name={RouteName.Profile} component={Profile} /> */}
-      <Tab.Screen name={RouteName.Result} component={Result} />
+      <Tab.Screen name={RouteName.ThongBao} component={ThongBao} />
+      <Tab.Screen name={RouteName.Profile} component={Profile} />
     </Tab.Navigator>
   );
 }
@@ -42,9 +41,10 @@ function AppNavigator(): ReactElement {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={RouteName.HomeTab}>
+        initialRouteName={RouteName.Login}>
         <Stack.Screen component={BottomTabHome} name={RouteName.HomeTab} />
-        {/* <Stack.Screen component={Result} name={RouteName.Result} /> */}
+        <Stack.Screen component={Result} name={RouteName.Result} />
+        <Stack.Screen component={Login} name={RouteName.Login} />
       </Stack.Navigator>
       {/* <ModalLogin /> */}
     </NavigationContainer>

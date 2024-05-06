@@ -6,6 +6,7 @@ import {showError} from '../utils/notification';
 import {isIOS} from '../utils/device';
 import RequiredAuthenticationAction from '../../RequiredAuthenticationAction';
 import {AnyAction, Dispatch} from 'redux';
+import SyncStorage from 'sync-storage';
 
 export interface IDataError {
   status: string;
@@ -74,8 +75,10 @@ function displayError(dataError: IDataError): void {
     showError(_.toString(e));
   }
 }
+const endpoint = SyncStorage.get('endpoint');
 
 export function fetcher<T>(
+
   config: AxiosRequestConfig,
   dispatch?: Dispatch<AnyAction>,
   options: IFetcherOptions = {},
@@ -95,7 +98,7 @@ export function fetcher<T>(
       'Access-Control-Allow-Origin': '*',
     },
     // mode: 'no-cors',
-    baseURL: Config.APP_CONFIG.API_BASE_URL,
+    baseURL: Config.APP_CONFIG.API_BASE_URL+endpoint,
     timeout: Config.APP_CONFIG.TIMEOUT,
   });
   const state = store.getState();

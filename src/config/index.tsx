@@ -14,8 +14,8 @@ const ENV_KEY = {
 const APP_CONFIG = {
   ENV_KEY: 'DEVELOP',
 
-  HOST: 'https://sheetdb.io/api/v1/fovwae5mxlivt',
-  API_BASE_URL: 'https://sheetdb.io/api/v1/fovwae5mxlivt',
+  HOST: 'https://sheetdb.io/api/v1/',
+  API_BASE_URL: 'https://sheetdb.io/api/v1/',
 
   TIMEOUT: 300000,
   RETRY: false,

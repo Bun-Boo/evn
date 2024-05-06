@@ -1,372 +1,305 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {ReactElement} from 'react';
 import {
-  Dimensions,
-  FlatList,
   ScrollView,
   StyleSheet,
-  Text,
   View,
+  ActivityIndicator,
+  Text,
 } from 'react-native';
-import {Image} from 'react-native-elements';
 import AppView from 'src/components/Global/AppView';
-import ListPodCast from 'src/components/Global/ListPodCast';
-import TextInputGlobal from 'src/components/Global/TextInputGlobal';
-import TouchableGlobal from 'src/components/Global/TouchableGlobal';
-
-import AppButton from 'src/components/Global/AppButton';
-import AppText from 'src/components/Global/AppText';
 import { Formik } from 'formik';
 import RouteName from 'src/routes/RouteName';
-
+import Input1 from './input1';
+import Input2 from './input2';
+import Input3 from './input3';
+import Input4 from './input4';
+import * as yup from 'yup';
+import ApiHome from 'src/api/Home/ApiHome';
+import getCurrentDateTime from 'src/utils/getCurrentDateTime';
+import SyncStorage from 'sync-storage';
 
 function HomeScreen(): ReactElement {
   const navigation = useNavigation();
-  const btnNext = (): void => {
-    navigation.navigate(RouteName.Result);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  // role
+  const [role, setRole] = useState(null);
+  const loginBody = SyncStorage.get('loginBody');
+  if (loginBody && !role) {
+    setRole(loginBody.role);
+    if (Number(loginBody.role) === 1) {
+      setPage(1);
+    }
+  }
+
+  //start stage of the form
+  const [cot, setCot] = useState('1');
+  const [tinh, setTinh] = useState('');
+  const [huyen, setHuyen] = useState('');
+  const [xa, setXa] = useState('');
+  const [vungGio, setVungGio] = useState('');
+  const [dangDiaHinh, setDangDiaHinh] = useState('');
+  const [doCaoQuyDoiGio, setDoCaoQuyDoiGio] = useState<Number>(0);
+  const [thoiGianSuDungCongTrinh, setThoiGianSuDungCongTrinh] = useState<Number>(0);
+  const [capDienApDen, setCapDienApDen] = useState('');
+  const [dayDan, setDayDan] = useState('');
+  const [ungSuatLonNhat, setUngSuatLonNhat] = useState<Number>(0);
+  const [ungSuatTrungBinh, setUngSuatTrungBinh] = useState<Number>(0);
+  const [doCaoTreoDayTrungBinh, setDoCaoTreoDayTrungBinh] = useState<Number>(0);
+  const [kcMinChoPhepTuDayDanDenMatDat, setKcMinChoPhepTuDayDanDenMatDat] = useState<Number>(0);
+  const [soLuongPhanPha, setSoLuongPhanPha] = useState('1');
+  const [soLuongDayDanTrenMotTangXa, setSoLuongDayDanTrenMotTangXa] = useState('1');
+  const [kcTuDiemTreoDayToiTamCotH4, setKcTuDiemTreoDayToiTamCotH4] = useState<Number>(0);
+  const [loaiCotBeTongLiTam, setLoaiCotBeTongLiTam] = useState('');
+  const [chieuCaoCot, setChieuCaoCot] = useState('');
+  const [heSoAnToan, setHeSoAnToan] = useState<Number>(1.2);
+  const [congDungCot, setCongDungCot] = useState('');
+  const [loaiCot, setLoaiCot] = useState('');
+  const [kc, setKc] = useState<Number>(0);
+  const [kcGio, setKcGio] = useState<Number>(0);
+  const [kcTrongLuong, setKcTrongLuong] = useState<Number>(0);
+  const [kcDaiBieu, setKcDaiBieu] = useState<Number>(0);
+  const [gocNeo, setGocNeo] = useState<Number>(0);
+  const [soMach, setSoMach] = useState('1');
+
+  //end stage of the form
+
+  const validationSchemaPage1 = yup.object().shape({
+    doCaoQuyDoiGio: yup.number().min(0, 'Độ cao tối thiểu').required('Độ cao quy đổi gió không được để trống'),
+    thoiGianSuDungCongTrinh: yup.number().min(0, 'Thời gian sử dụng công trình tối thiểu').required('Thời gian sử dụng công trình không được để trống'),
+  });
+
+  const validationSchemaPage2 = yup.object().shape({
+    ungSuatLonNhat: yup.number().min(0, 'Ứng suất lớn nhất tối thiểu').required('Ứng suất lớn nhất không được để trống'),
+    ungSuatTrungBinh: yup.number().min(0, 'Ứng suất trung bình tối thiểu').required('Ứng suất trung bình không được để trống'),
+  });
+
+  const validationSchemaPage3 = yup.object().shape({
+    doCaoTreoDayTrungBinh: yup.number().min(0, 'Độ cao trung bình tối thiểu').required('Độ cao trung bình không được để trống'),
+    kcMinChoPhepTuDayDanDenMatDat: yup.number().min(0, 'Khoảng cách tối thiểu').required('Khoảng cách tối thiểu không được để trống'),
+    kcTuDiemTreoDayToiTamCotH4: yup.number().min(0, 'Khoảng cách tối thiểu').required('Khoảng cách không được để trống'),
+    // chieuCaoCot: yup.string().required('Chiều cao không được để trống'),
+    heSoAnToan: yup.number().min(0, 'Hệ số an toàn tối thiểu').required('Hệ số an toàn không được để trống'),
+  });
+
+  const validationSchemaPage4 = yup.object().shape({
+    kc: yup.number().min(0, 'Khoảng cách tối thiểu').required('Khoảng cách không được để trống'),
+    kcGio: yup.number().min(0, 'Khoảng cách tối thiểu').required('Khoảng cách không được để trống'),
+    kcTrongLuong: yup.number().min(0, 'Khoảng cách tối thiểu').required('Khoảng cách không được để trống'),
+    kcDaiBieu: yup.number().min(0, 'Khoảng cách tối thiểu').required('Khoảng cách không được để trống'),
+    // gocNeo: yup.number().min(0, 'Góc neo tối thiểu').required('Góc neo không được để trống'),
+  });
+
+  const changeValidationSchema = (page: number) => {
+    switch (page) {
+      case 2:
+        return validationSchemaPage2;
+      case 3:
+        return validationSchemaPage3;
+      case 4:
+        return validationSchemaPage4;
+      default:
+        return validationSchemaPage1;
+    }
   };
+
+
+  const changePage = (page: number, { handleSubmit, handleBack}: { handleSubmit: () => void, handleBack: () => void }) => {
+    // console.log(">>> page", page);
+    switch (page) {
+      case 1:
+        return <Input1
+          cot={cot}
+          tinh={tinh}
+          huyen={huyen}
+          xa={xa}
+          vungGio={vungGio}
+          dangDiaHinh={dangDiaHinh}
+          doCaoQuyDoiGio={doCaoQuyDoiGio}
+          thoiGianSuDungCongTrinh={thoiGianSuDungCongTrinh}
+          capDienApDen={capDienApDen}
+          setCot={setCot}
+          setTinh={setTinh}
+          setHuyen={setHuyen}
+          setXa={setXa}
+          setVungGio={setVungGio}
+          setDangDiaHinh={setDangDiaHinh}
+          setCapDienApDen={setCapDienApDen}
+          handleSubmit={handleSubmit}
+          handleBack={handleBack}
+          />;
+      case 2:
+        return <Input2
+          dayDan={dayDan}
+          ungSuatLonNhat={ungSuatLonNhat}
+          ungSuatTrungBinh={ungSuatTrungBinh}
+          setDayDan={setDayDan}
+          handleSubmit={handleSubmit}
+          handleBack={handleBack}
+          />;
+      case 3:
+        return <Input3
+          doCaoTreoDayTrungBinh={doCaoTreoDayTrungBinh}
+          kcMinChoPhepTuDayDanDenMatDat={kcMinChoPhepTuDayDanDenMatDat}
+          soLuongPhanPha={soLuongPhanPha}
+          soLuongDayDanTrenMotTangXa={soLuongDayDanTrenMotTangXa}
+          kcTuDiemTreoDayToiTamCotH4={kcTuDiemTreoDayToiTamCotH4}
+          loaiCotBeTongLiTam={loaiCotBeTongLiTam}
+          chieuCaoCot={chieuCaoCot}
+          heSoAnToan={heSoAnToan}
+          setSoLuongPhanPha={setSoLuongPhanPha}
+          setSoLuongDayDanTrenMotTangXa={setSoLuongDayDanTrenMotTangXa}
+          handleSubmit={handleSubmit}
+          handleBack={handleBack}
+          />;
+      case 4:
+        return <Input4
+          congDungCot={congDungCot}
+          loaiCot={loaiCot}
+          kc={kc}
+          kcGio={kcGio}
+          kcTrongLuong={kcTrongLuong}
+          kcDaiBieu={kcDaiBieu}
+          gocNeo={gocNeo}
+          soMach={soMach}
+          setCongDungCot={setCongDungCot}
+          setLoaiCot={setLoaiCot}
+          setSoMach={setSoMach}
+          handleSubmit={handleSubmit}
+          handleBack={handleBack}
+          />;
+      default:
+        return <Text style={{marginTop: '100%', fontSize: 15, textAlign: 'center'}}>Bạn không có quyền truy cập mục này</Text>
+    }
+  };
+
+  const handleBack = () => {
+    if (page === 1) {
+      
+      return;
+    }
+    setPage(page - 1);
+  };
+
   return (
     <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <View style={{padding: 20, marginBottom: 100}}>
+        {loading ? <ActivityIndicator size="large" color="#0000ff" style={{marginTop: '50%'}}/> :
         <AppView fill marginHorizontal={16}>
           <Formik
             enableReinitialize
             initialValues={{
-              password: '',
-              renterPassword: '',
+              doCaoQuyDoiGio: '',
+              thoiGianSuDungCongTrinh: '',
+              ungSuatLonNhat: '',
+              ungSuatTrungBinh: '',
+              doCaoTreoDayTrungBinh: '',
+              kcMinChoPhepTuDayDanDenMatDat: '',
+              kcTuDiemTreoDayToiTamCotH4: '',
+              loaiCotBeTongLiTam: '',
+              chieuCaoCot: '',
+              heSoAnToan: '',
+              kc: '',
+              kcGio: '',
+              kcTrongLuong: '',
+              kcDaiBieu: '',
+              gocNeo: '',
             }}
-            // validationSchema={{}}
-            onSubmit={() => {}}>
-            {({handleSubmit}): ReactElement => (
-              <AppView>
-                <TextInputGlobal
-                  label="Chọn cột:"
-                  name="password"
-                  placeholder="Chọn cột"
-                  isDropdown
-                  listDropdown={[
-                    {label: 'Cột 1', value: '1'},
-                    {label: 'Cột 2', value: '2'},
-                    {label: 'Cột 3', value: '3'},
-                  ]}
-                />
-                <TextInputGlobal
-                  label="Tỉnh/TP:"
-                  name="renterPassword"
-                  placeholder="Chọn tỉnh/TP"
-                  isDropdown
-                  listDropdown={[
-                    {label: 'Hà Nội', value: '1'},
-                    {label: 'Hồ Chí Minh', value: '2'},
-                    {label: 'Đà Nẵng', value: '3'},
-                  ]}
-                />
-                <TextInputGlobal
-                  label="Vùng gió (daN/m2):"
-                  name="renterPassword"
-                  placeholder="Chọn tỉnh/TP"
-                  isDropdown
-                  listDropdown={[
-                    {label: '1', value: '1'},
-                    {label: '2', value: '2'},
-                    {label: '3', value: '3'},
-                  ]}
-                />
-                <TextInputGlobal
-                  label="Dạng địa hình"
-                  name="renterPassword"
-                  placeholder="Chọn tỉnh/TP"
-                />
-                <TextInputGlobal
-                  label="Độ cao quy đổi gió (m):"
-                  name="renterPassword"
-                  placeholder="Chọn tỉnh/TP"
-                />
-                <TextInputGlobal
-                  label="Thời gian sử dụng công trình (năm):"
-                  name="renterPassword"
-                  placeholder="Chọn tỉnh/TP"
-                />
-                <TextInputGlobal
-                  label="Cấp điện áp đến (kV):"
-                  name="renterPassword"
-                  placeholder="Chọn tỉnh/TP"
-                  isDropdown
-                  listDropdown={[
-                    {label: '1', value: '1'},
-                    {label: '2', value: '2'},
-                    {label: '3', value: '3'},
-                  ]}
-                />
-                <AppView row fill>
-                  <AppButton
-                    text="Đặt lại"
-                    textColor={'white'}
-                    onPress={(): void => {
-                      handleSubmit();
-                    }}
-                    backgroundColor={'red'}
-                    borderRadius={8}
-                    // loading={createNewPasswordMutation.isLoading}
-                    style={{width: '50%', marginRight: 10}}
-                  />
-                  <AppButton
-                    text="Tiếp tục"
-                    textColor={'white'}
-                    onPress={(): void => {
-                      btnNext();
-                    }}
-                    backgroundColor={'blue'}
-                    borderRadius={8}
-                    style={{width: '50%'}}
-                    // loading={createNewPasswordMutation.isLoading}
-                  />
-                </AppView>
-              </AppView>
+            validationSchema={changeValidationSchema(page)}
+            onSubmit={(values) => {
+              console.log(">>> values", values);
+              if (page === 4) {
+                setLoading(true);
+                let diaPhuong = huyen;
+                if (xa && xa != '' && xa != diaPhuong) {
+                  diaPhuong = `${huyen} - ${xa}`;
+                }
 
-              // <AppView>
-              //   <TextInputGlobal
-              //     label="Dây dẫn:"
-              //     name="password"
-              //     placeholder="Chọn dây dẫn"
-              //     isDropdown
-              //     listDropdown={[
-              //       {label: 'Cột 1', value: '1'},
-              //       {label: 'Cột 2', value: '2'},
-              //       {label: 'Cột 3', value: '3'},
-              //     ]}
-              //   />
-              //   <TextInputGlobal
-              //     label="Module đàn hồi (Kg/mm2):"
-              //     name="renterPassword"
-              //     placeholder="Nhập module đàn hồi (Kg/mm2)"
-              //   />
-              //   <TextInputGlobal
-              //     label="Hệ số dãn nở dài x10-6 (1/oC):"
-              //     name="renterPassword"
-              //     placeholder="Nhập hệ số dãn nở dài x10-6 (1/oC):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Đường kính chịu gió (mm):"
-              //     name="renterPassword"
-              //     placeholder="Đường kính chịu gió (mm):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Tiết diện (mm2):"
-              //     name="renterPassword"
-              //     placeholder="Tiết diện (mm2):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Trọng lượng riêng (Kg/m):"
-              //     name="renterPassword"
-              //     placeholder="Trọng lượng riêng (Kg/m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Ứng suất đứt (daN/mm2):"
-              //     name="renterPassword"
-              //     placeholder="Ứng suất đứt (daN/mm2):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Ứng suất lớn nhất (daN/mm2):"
-              //     name="renterPassword"
-              //     placeholder="Ứng suất lớn nhất (daN/mm2):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Ứng suất trung bình (daN/mm2):"
-              //     name="renterPassword"
-              //     placeholder="Ứng suất trung bình (daN/mm2):"
-              //   />
-              //   <AppView row fill>
-              //     <AppButton
-              //       text="Đặt lại"
-              //       textColor={'white'}
-              //       onPress={(): void => {
-              //         handleSubmit();
-              //       }}
-              //       backgroundColor={'red'}
-              //       borderRadius={8}
-              //       // loading={createNewPasswordMutation.isLoading}
-              //       style={{width: '50%', marginRight: 10}}
-              //     />
-              //     <AppButton
-              //       text="Tiếp tục"
-              //       textColor={'white'}
-              //       onPress={(): void => {
-              //         handleSubmit();
-              //       }}
-              //       backgroundColor={'blue'}
-              //       borderRadius={8}
-              //       style={{width: '50%'}}
-              //       // loading={createNewPasswordMutation.isLoading}
-              //     />
-              //   </AppView>
-              // </AppView>
-              // <AppView>
-              //   <TextInputGlobal
-              //     label="Độ cao treo dây trung bình (m):"
-              //     name="password"
-              //     placeholder="Độ cao treo dây trung bình (m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="K/C min cho phép từ dây dẫn đến mặt đất (m):"
-              //     name="renterPassword"
-              //     placeholder="K/C min cho phép từ dây dẫn đến mặt đất (m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Số lượng phân pha:"
-              //     name="renterPassword"
-              //     placeholder="Nhập Số lượng phân pha:"
-              //     isDropdown
-              //     listDropdown={[
-              //       {label: '1', value: '1'},
-              //       {label: '2', value: '2'},
-              //       {label: '3', value: '3'},
-              //     ]}
-              //   />
-              //   <TextInputGlobal
-              //     label="Số lượng dây dẫn trên một tầng xà:"
-              //     name="renterPassword"
-              //     placeholder="Số lượng dây dẫn trên một tầng xà:"
-              //     isDropdown
-              //     listDropdown={[
-              //       {label: '1', value: '1'},
-              //       {label: '2', value: '2'},
-              //       {label: '3', value: '3'},
-              //     ]}
-              //   />
-              //   <TextInputGlobal
-              //     label="Khoảng cách từ điểm treo dây tới tâm cột H4/2 (m):"
-              //     name="renterPassword"
-              //     placeholder="Khoảng cách từ điểm treo dây tới tâm cột H4/2 (m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Loại cột bê tông li tâm:"
-              //     name="renterPassword"
-              //     placeholder="Loại cột bê tông li tâm:"
-              //   />
-              //   <TextInputGlobal
-              //     label="Chiều cao cột (m):"
-              //     name="renterPassword"
-              //     placeholder="Chiều cao cột (m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Hệ số an toàn:"
-              //     name="renterPassword"
-              //     placeholder="Hệ số an toàn:"
-              //   />
-              //   <AppView row fill>
-              //     <AppButton
-              //       text="Đặt lại"
-              //       textColor={'white'}
-              //       onPress={(): void => {
-              //         handleSubmit();
-              //       }}
-              //       backgroundColor={'red'}
-              //       borderRadius={8}
-              //       // loading={createNewPasswordMutation.isLoading}
-              //       style={{width: '50%', marginRight: 10}}
-              //     />
-              //     <AppButton
-              //       text="Tiếp tục"
-              //       textColor={'white'}
-              //       onPress={(): void => {
-              //         handleSubmit();
-              //       }}
-              //       backgroundColor={'blue'}
-              //       borderRadius={8}
-              //       style={{width: '50%'}}
-              //       // loading={createNewPasswordMutation.isLoading}
-              //     />
-              //   </AppView>
-              // </AppView>
-              // <AppView>
-              //   <TextInputGlobal
-              //     label="Công dụng cột:"
-              //     name="password"
-              //     placeholder="Công dụng cột:"
-              //     isDropdown
-              //     listDropdown={[
-              //       {label: 'Cột 1', value: '1'},
-              //       {label: 'Cột 2', value: '2'},
-              //       {label: 'Cột 3', value: '3'},
-              //     ]}
-              //   />
-              //   <TextInputGlobal
-              //     label="Loại cột:"
-              //     name="renterPassword"
-              //     placeholder="Loại cột:"
-              //     isDropdown
-              //     listDropdown={[
-              //       {label: 'Cột 1', value: '1'},
-              //       {label: 'Cột 2', value: '2'},
-              //       {label: 'Cột 3', value: '3'},
-              //     ]}
-              //   />
-              //   <TextInputGlobal
-              //     label="K/C (m):"
-              //     name="renterPassword"
-              //     placeholder="Nhập K/C (m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="K/C gió (m):"
-              //     name="renterPassword"
-              //     placeholder="K/C gió (m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="K/C trọng lượng (m)::"
-              //     name="renterPassword"
-              //     placeholder="K/C trọng lượng (m)::"
-              //   />
-              //   <TextInputGlobal
-              //     label="K/C đại biểu (m):"
-              //     name="renterPassword"
-              //     placeholder="K/C đại biểu (m):"
-              //   />
-              //   <TextInputGlobal
-              //     label="Góc néo (độ)"
-              //     name="renterPassword"
-              //     placeholder="Góc néo (độ)"
-              //   />
-              //   <TextInputGlobal
-              //     label="Số mạch:"
-              //     name="renterPassword"
-              //     placeholder="Số mạch:"
-              //     isDropdown
-              //     listDropdown={[
-              //       {label: '1', value: '1'},
-              //       {label: '2', value: '2'},
-              //       {label: '3', value: '3'},
-              //     ]}
-              //   />
-              //   <AppView row fill>
-              //     <AppButton
-              //       text="Đặt lại"
-              //       textColor={'white'}
-              //       onPress={(): void => {
-              //         handleSubmit();
-              //       }}
-              //       backgroundColor={'red'}
-              //       borderRadius={8}
-              //       // loading={createNewPasswordMutation.isLoading}
-              //       style={{width: '50%', marginRight: 10}}
-              //     />
-              //     <AppButton
-              //       text="Tiếp tục"
-              //       textColor={'white'}
-              //       onPress={(): void => {
-              //         handleSubmit();
-              //       }}
-              //       backgroundColor={'blue'}
-              //       borderRadius={8}
-              //       style={{width: '50%'}}
-              //       // loading={createNewPasswordMutation.isLoading}
-              //     />
-              //   </AppView>
-              // </AppView>
+                ApiHome.patchInput({
+                  id: '1310',
+                  diaPhuong: diaPhuong,
+                  vungGio: vungGio,
+                  dangDiaHinh: dangDiaHinh,
+                  doCaoQuyDoiGio: Number(values.doCaoQuyDoiGio),
+                  thoiGianSuDungCongTrinh: Number(values.thoiGianSuDungCongTrinh),
+                  capDienApDen: capDienApDen,
+                  dayDan: dayDan,
+                  ungSuatLonNhat: Number(values.ungSuatLonNhat),
+                  ungSuatTrungBinh: Number(values.ungSuatTrungBinh),
+                  doCaoTreoDayTrungBinh: Number(values.doCaoTreoDayTrungBinh)??0,
+                  khoangCachMinChoPhepTuDayDanDenMatDat: Number(values.kcMinChoPhepTuDayDanDenMatDat)??0,
+                  soLuongPhanPha: soLuongPhanPha,
+                  soLuongDayDanTrenMotTangXa: soLuongDayDanTrenMotTangXa,
+                  khoangCachTuDiemTreoDayToiTamCotH4: Number(values.kcTuDiemTreoDayToiTamCotH4)??0,
+                  loaiCotBeTongLiTam: values.loaiCotBeTongLiTam,
+                  chieuCaoCot: values.chieuCaoCot,
+                  heSoAnToan: values.heSoAnToan??'1.2',
+                  congDungCot: congDungCot,
+                  loaiCot: loaiCot,
+                  kc: Number(values.kc)??0,
+                  kcGio: Number(values.kcGio)??0,
+                  kcTrongLuong: Number(values.kcTrongLuong)??0,
+                  kcDaiBieu: Number(values.kcDaiBieu)??0,
+                  gocNeo: values.gocNeo=='0'? '' : values.gocNeo,
+                  soMach: soMach,
+                }).then((res) => {
+                  navigation.navigate(RouteName.Result, {
+                    cot: cot=='1',
+                    loaiDayDan: dayDan,
+                    vungGio: vungGio,
+                    ungSuatLonNhat: values.ungSuatLonNhat,
+                    ungSuatTrungBinh: values.ungSuatTrungBinh,
+                  });
+                });
+
+                ApiHome.postHistory({
+                  id: 'INCREMENT',
+                  diaPhuong: diaPhuong,
+                  vungGio: vungGio,
+                  dangDiaHinh: dangDiaHinh,
+                  doCaoQuyDoiGio: Number(values.doCaoQuyDoiGio),
+                  thoiGianSuDungCongTrinh: Number(values.thoiGianSuDungCongTrinh),
+                  capDienApDen: capDienApDen,
+                  dayDan: dayDan,
+                  ungSuatLonNhat: Number(values.ungSuatLonNhat),
+                  ungSuatTrungBinh: Number(values.ungSuatTrungBinh),
+                  doCaoTreoDayTrungBinh: Number(values.doCaoTreoDayTrungBinh)??0,
+                  khoangCachMinChoPhepTuDayDanDenMatDat: Number(values.kcMinChoPhepTuDayDanDenMatDat)??0,
+                  soLuongPhanPha: soLuongPhanPha,
+                  soLuongDayDanTrenMotTangXa: soLuongDayDanTrenMotTangXa,
+                  khoangCachTuDiemTreoDayToiTamCotH4: Number(values.kcTuDiemTreoDayToiTamCotH4)??0,
+                  loaiCotBeTongLiTam: values.loaiCotBeTongLiTam,
+                  chieuCaoCot: values.chieuCaoCot,
+                  heSoAnToan: values.heSoAnToan??'1.2',
+                  congDungCot: congDungCot,
+                  loaiCot: loaiCot,
+                  kc: Number(values.kc)??0,
+                  kcGio: Number(values.kcGio)??0,
+                  kcTrongLuong: Number(values.kcTrongLuong)??0,
+                  kcDaiBieu: Number(values.kcDaiBieu)??0,
+                  gocNeo: values.gocNeo=='0'? '' : values.gocNeo,
+                  soMach: soMach,
+                  chonCot: cot,
+                  dateTime: getCurrentDateTime(),
+                }).then((res) => {
+                  setLoading(false);
+                });
+
+                
+              } else{
+                setPage(page + 1);
+              }
+            }}>
+            {({handleSubmit}): ReactElement => (
+              <>
+                {changePage(page, { handleSubmit, handleBack})}
+              </>
             )}
           </Formik>
-        </AppView>
+        </AppView>}
       </View>
     </ScrollView>
   );

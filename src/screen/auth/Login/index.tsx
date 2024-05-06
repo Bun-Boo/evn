@@ -23,9 +23,7 @@ import {showError, showSuccess} from 'src/utils/notification';
 import ApiUser, {ILoginBody} from 'src/api/User/ApiUser';
 import {useMutation} from 'react-query';
 import {useDispatch} from 'react-redux';
-import UserAction from 'src/redux/actions/UserAction';
-import UserActionGetProfile from 'src/redux/actions/UserActionGetProfile';
-import {checkValidLogin} from 'src/utils/checkValidLogin';
+import SyncStorage from 'sync-storage';
 
 export default function Login(): ReactElement {
   const navigation = useNavigation();
@@ -36,55 +34,48 @@ export default function Login(): ReactElement {
   const getInfoMutation = useMutation(ApiUser.getInfoStudent);
   const dispatch = useDispatch();
 
+ 
+  useEffect(() => {
+    const isRemember = SyncStorage.get('isRememberChecked');
+    const loginBody = SyncStorage.get('loginBody');
+    if (isRemember) {
+      setRememberChecked(isRemember);
+    }
+    if (loginBody) {
+      dispatch({type: 'SET_USER', payload: loginBody});
+    }
+
+    if (isRemember && loginBody) {
+      navigation.dispatch(StackActions.replace('HomeTab'));
+    }
+  }, []);
+
   const handleLogin = async (value: ILoginBody): Promise<void> => {
     const loginBody = {
       TC_SV_MaSinhVien: value.TC_SV_MaSinhVien.trim(),
       TC_SV_MaSinhVien_Pass: value.TC_SV_MaSinhVien_Pass.trim(),
+      role: null
     };
     if (!loginBody.TC_SV_MaSinhVien || !loginBody.TC_SV_MaSinhVien_Pass) {
       showError('Vui lòng cung cấp đủ thông tin');
     }
-    // navigation.navigate("HomeTab");
-    loginMutation.mutate(loginBody, {
-      onSuccess: res => {
-        // console.log('res', res);
-        if (res.code === 200) {
-          dispatch(
-            UserAction.userLogin({
-              ...res,
-            }),
-          );
-          if (checkValidLogin()) {
-            getInfoMutation.mutate(
-              {
-                TC_SV_MaSinhVien: loginBody.TC_SV_MaSinhVien,
-              },
-              {
-                onSuccess: res => {
-                  if (res.code === 200) {
-                    dispatch(
-                      UserActionGetProfile.userGetProfile({
-                        ...res,
-                      }),
-                    );
-                    navigation.dispatch(StackActions.replace('HomeTab'));
-                    // navigation.dispatch(StackActions.replace('BottomTab'));
-                    const {userInfo} = store.getState();
-                    showSuccess(
-                      `Xin chào, ${userInfo?.body[0]?.HoDem} ${userInfo?.body[0]?.Ten}`,
-                    );
-                  }
-                },
-              },
-            );
-          }
-        } else {
-          showError('Somethings Wrong');
-        }
-      },
-      onError() {
-        showError('Sai tên đăng nhập hoặc mật khẩu');
-      },
+    
+
+    ApiUser.checkLogin(loginBody.TC_SV_MaSinhVien).then((res) => {
+      if (res.length === 0) {
+        showError('Tài khoản không tồn tại');
+        return;
+      }
+
+      if (res[0].password !== loginBody.TC_SV_MaSinhVien_Pass) {
+        showError('Mật khẩu không đúng');
+        return;
+      }
+
+      SyncStorage.set('isRememberChecked', isRememberChecked);
+      loginBody.role = res[0].role;
+      SyncStorage.set('loginBody', loginBody);
+      navigation.dispatch(StackActions.replace('HomeTab'));
     });
   };
 
@@ -99,8 +90,8 @@ export default function Login(): ReactElement {
             <AppView>
               <Formik
                 initialValues={{
-                  TC_SV_MaSinhVien: '20107100413',
-                  TC_SV_MaSinhVien_Pass: '1111',
+                  TC_SV_MaSinhVien: 'admin',
+                  TC_SV_MaSinhVien_Pass: 'admin',
                 }}
                 validateOnChange={false}
                 validateOnBlur={false}
@@ -133,7 +124,7 @@ export default function Login(): ReactElement {
                           marginBottom={10}
                           marginTop={30}
                           textTransform="uppercase">
-                          Mã sinh viên
+                          Tên đăng nhập
                         </AppText>
                         <AppView
                           rowAlignCenter
@@ -162,7 +153,7 @@ export default function Login(): ReactElement {
                               ...style.inputField,
                               width: '100%',
                             }}
-                            placeholder="Nhập mã sinh viên"
+                            placeholder="Nhập tên đăng nhập"
                             onChangeText={handleChange('TC_SV_MaSinhVien')}
                             onBlur={handleBlur('TC_SV_MaSinhVien')}
                             value={values.TC_SV_MaSinhVien}
@@ -227,18 +218,6 @@ export default function Login(): ReactElement {
                       rowAlignCenter
                       justifyContent="space-between"
                       marginTop={10}>
-                      <TouchableOpacity
-                        style={style.buttonArea}
-                        onPress={(): void => {
-                          navigation.navigate('ForgotPasswordRoute');
-                        }}>
-                        <AppText
-                          borderColor={Config.COLOR_CONFIG.NEUTRALS_6}
-                          color="#E1453C"
-                          fontSize={17}>
-                          Quên mật khẩu!
-                        </AppText>
-                      </TouchableOpacity>
                       <AppView rowAlignCenter>
                         <CheckBox
                           containerStyle={{margin: 0, padding: 0}}

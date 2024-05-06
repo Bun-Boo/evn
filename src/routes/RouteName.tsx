@@ -1,4 +1,4 @@
-const RouteName = {
+const RouteName:any = {
   Login: 'LoginRoute',
   BottomTab: 'BottomTab',
   HomeTab: 'HomeTab',

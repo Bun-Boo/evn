@@ -388,15 +388,16 @@ PODS:
   - React-jsinspector (0.72.4)
   - React-logger (0.72.4):
     - glog
-  - react-native-date-picker (4.3.3):
+  - react-native-date-picker (4.4.2):
     - React-Core
   - react-native-image-resizer (1.4.5):
     - React-Core
-  - react-native-netinfo (9.4.1):
+  - react-native-netinfo (9.5.0):
     - React-Core
-  - react-native-pager-view (6.2.1):
+  - react-native-pager-view (6.3.1):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - react-native-safe-area-context (4.7.2):
+  - react-native-safe-area-context (4.10.1):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
@@ -510,65 +511,43 @@ PODS:
     - React-jsi (= 0.72.4)
     - React-logger (= 0.72.4)
     - React-perflogger (= 0.72.4)
-  - RNCAsyncStorage (1.19.3):
+  - RNCAsyncStorage (1.23.1):
     - React-Core
-  - RNCCheckbox (0.5.16):
+  - RNCCheckbox (0.5.17):
     - BEMCheckBox (~> 1.4)
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
-  - RNDeviceInfo (10.9.0):
+  - RNDeviceInfo (10.13.2):
     - React-Core
   - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNGestureHandler (2.12.1):
+  - RNGestureHandler (2.16.1):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNImageCropPicker (0.40.0):
+  - RNImageCropPicker (0.40.3):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.40.0)
+    - RNImageCropPicker/QBImagePickerController (= 0.40.3)
     - TOCropViewController
-  - RNImageCropPicker/QBImagePickerController (0.40.0):
+  - RNImageCropPicker/QBImagePickerController (0.40.3):
     - React-Core
     - React-RCTImage
     - TOCropViewController
-  - RNReanimated (3.5.2):
-    - DoubleConversion
-    - FBLazyVector
-    - glog
-    - hermes-engine
-    - RCT-Folly
-    - RCTRequired
-    - RCTTypeSafety
-    - React-callinvoker
+  - RNReanimated (3.10.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-    - React-Core/DevSupport
-    - React-Core/RCTWebSocket
-    - React-CoreModules
-    - React-cxxreact
-    - React-hermes
-    - React-jsi
-    - React-jsiexecutor
-    - React-jsinspector
-    - React-RCTActionSheet
-    - React-RCTAnimation
-    - React-RCTAppDelegate
-    - React-RCTBlob
-    - React-RCTImage
-    - React-RCTLinking
-    - React-RCTNetwork
-    - React-RCTSettings
-    - React-RCTText
     - ReactCommon/turbomodule/core
-    - Yoga
-  - RNScreens (3.25.0):
+  - RNScreens (3.31.1):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-RCTImage
-  - RNSVG (13.13.0):
+  - RNSVG (13.14.0):
     - React-Core
-  - RNVectorIcons (10.0.0):
+  - RNVectorIcons (10.1.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
@@ -837,11 +816,11 @@ SPEC CHECKSUMS:
   React-jsiexecutor: c7f826e40fa9cab5d37cab6130b1af237332b594
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
-  react-native-date-picker: 1d61c76315098a6ad4c643a356f005916c7d4875
+  react-native-date-picker: 312c387d2ff873c66c5e4cf78ff6827fa91644e2
   react-native-image-resizer: d9fb629a867335bdc13230ac2a58702bb8c8828f
-  react-native-netinfo: fefd4e98d75cbdd6e85fc530f7111a8afdf2b0c5
-  react-native-pager-view: d211379f61895b6349bd7e571b44a26d005c2975
-  react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
+  react-native-netinfo: 48c5f79a84fbc3ba1d28a8b0d04adeda72885fa8
+  react-native-pager-view: 712081434052f3af89ef00e8a353a7d351e62eeb
+  react-native-safe-area-context: dcab599c527c2d7de2d76507a523d20a0b83823d
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   React-NativeModulesApple: edb5ace14f73f4969df6e7b1f3e41bef0012740f
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
@@ -860,17 +839,17 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 4941cc1b3cf08b792fbf666342c9fc95f1969035
   React-utils: b79f2411931f9d3ea5781404dcbb2fa8a837e13a
   ReactCommon: 4b2bdcb50a3543e1c2b2849ad44533686610826d
-  RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
-  RNCCheckbox: 75255b03e604bbcc26411eb31c4cbe3e3865f538
+  RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
+  RNCCheckbox: a3ca9978cb0846b981d28da4e9914bd437403d77
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
-  RNDeviceInfo: 02ea8b23e2280fa18e00a06d7e62804d74028579
+  RNDeviceInfo: 42aadf1282ffa0a88dc38a504a7be145eb010dfa
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
-  RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
-  RNImageCropPicker: 486e2f7e2b0461ce24321f751410dce1b3b49e6d
-  RNReanimated: 2491645f0883526f4470d8b5c761308709ba31f8
-  RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
-  RNSVG: ed492aaf3af9ca01bc945f7a149d76d62e73ec82
-  RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
+  RNGestureHandler: 83e5f2116076f0402da654c0541f7fca20d77775
+  RNImageCropPicker: e7ab6fb43d2fc3e84651e786ef4a080d63b0ed3d
+  RNReanimated: 93610716991840cff571fd75e3b61e97ae0d7919
+  RNScreens: 93ae3be2f119d955620f9bbb39ad372adb53b7a9
+  RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
+  RNVectorIcons: bfb663f3f7b37340cd90120151b720641523dc84
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17

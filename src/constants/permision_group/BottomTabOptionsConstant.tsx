@@ -39,12 +39,12 @@ const BottomTabHomeGroup = [
     index: 1,
     name: 'Lịch sử',
     routeName: RouteName.ThongBao,
-    icon: 'Heart_Full',
+    icon: 'globe-americas',
   },
   {
     index: 2,
     name: 'Cá nhân',
-    routeName: RouteName.Result,
+    routeName: RouteName.Profile,
     icon: 'User',
   },
 ];

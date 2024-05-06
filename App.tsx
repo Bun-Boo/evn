@@ -13,6 +13,8 @@ import NetInfo from '@react-native-community/netinfo';
 import {Provider} from 'react-redux';
 import store, {persistor} from 'src/redux/store';
 import {PersistGate} from 'redux-persist/es/integration/react';
+import SyncStorage from 'sync-storage';
+import ApiEndpoint from 'src/api/Endpoint/ApiEndpoint';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +23,8 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+
 
 function LoadingPersisGate() {
   return (
@@ -31,6 +35,17 @@ function LoadingPersisGate() {
 }
 
 function App(): JSX.Element {
+  async function componentWillMount(): Promise<void> {
+    const data = await SyncStorage.init();
+    console.log('AsyncStorage is ready!', data);
+   }
+
+  componentWillMount();
+
+  ApiEndpoint.getEndpoint().then((res: string) => {
+    SyncStorage.set('endpoint', res);
+  });
+
   const internetStateRef = useRef<number>();
   useEffect(() => {
     SplashScreen.hide();
