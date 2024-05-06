@@ -56,6 +56,7 @@ function ThongBaoScreen(): ReactElement {
         }).then((res) => {
           navigation.navigate(RouteName.Result, {
             cot: item.chonCot,
+            diaPhuong: item.diaPhuong,
             loaiDayDan: item.dayDan,
             vungGio: item.vungGio,
             ungSuatLonNhat: item.ungSuatLonNhat,

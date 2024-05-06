@@ -90,8 +90,11 @@ export default function Login(): ReactElement {
             <AppView>
               <Formik
                 initialValues={{
-                  TC_SV_MaSinhVien: 'admin',
-                  TC_SV_MaSinhVien_Pass: 'admin',
+                  // TC_SV_MaSinhVien: 'admin',
+                  // TC_SV_MaSinhVien_Pass: 'admin',
+
+                  TC_SV_MaSinhVien: '',
+                  TC_SV_MaSinhVien_Pass: '',
                 }}
                 validateOnChange={false}
                 validateOnBlur={false}

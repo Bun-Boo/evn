@@ -15,7 +15,7 @@ import AppButton from 'src/components/Global/AppButton';
 function ResultScreen(): ReactElement {
   const navigation = useNavigation();
   const route = useRoute();
-  const { cot, loaiDayDan, vungGio, ungSuatLonNhat, ungSuatTrungBinh } = route.params as { cot: boolean, loaiDayDan: string, vungGio: string, ungSuatLonNhat: string, ungSuatTrungBinh: string };
+  const { cot, diaPhuong, loaiDayDan, vungGio, ungSuatLonNhat, ungSuatTrungBinh } = route.params as { cot: boolean, diaPhuong: string, loaiDayDan: string, vungGio: string, ungSuatLonNhat: string, ungSuatTrungBinh: string };
 
   const [data, setData] = React.useState<IResult>();
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -53,6 +53,7 @@ function ResultScreen(): ReactElement {
       {loading && <ActivityIndicator size="large" color="#0000ff" style={{marginTop: '50%'}}/>}
       {data && <View style={{padding: 20, marginBottom: -40, backgroundColor: '#eee'}}>
         <AppView fill marginHorizontal={16}>
+        <AppText style={{fontWeight:'bold', textAlign: 'center', marginBottom: 15}}>{diaPhuong}</AppText>
           <AppView fill rowAlignCenter justify={'space-between'}>
             <AppText style={{fontWeight:'bold'}}>Loại dây dẫn: {loaiDayDan}</AppText>
             <AppText style={{fontWeight:'bold'}}>Vùng gió: {vungGio} </AppText>

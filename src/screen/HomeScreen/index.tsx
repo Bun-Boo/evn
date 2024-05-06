@@ -248,6 +248,7 @@ function HomeScreen(): ReactElement {
                 }).then((res) => {
                   navigation.navigate(RouteName.Result, {
                     cot: cot=='1',
+                    diaPhuong: diaPhuong,
                     loaiDayDan: dayDan,
                     vungGio: vungGio,
                     ungSuatLonNhat: values.ungSuatLonNhat,
